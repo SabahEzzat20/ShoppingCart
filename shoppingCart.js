@@ -16,7 +16,6 @@ const calculateTotal = () => {
     const total = products.reduce((sum, product) => {
         return sum + (product.price * product.qty);
     }, 0);
-    console.log(total);
     
     // Display total in the UI
     totalContainer.innerHTML = `$${total}`;
@@ -38,9 +37,9 @@ const listCartProducts = () => {
                     <div class="description card-text">${product.description}</div>
                     <div class="price">$${product.price}</div>
                     <div class="counter">
-                        <h5 class="plus" data-index="${i}">+</h5>
-                        <h5 class="count" data-index="${i}">${product.qty}</h5>
-                        <h5 class="minus" data-index="${i}">-</h5>
+                        <h5 class="plus" data-index="${product.id}">+</h5>
+                        <h5 class="count" data-index="${product.id}">${product.qty}</h5>
+                        <h5 class="minus" data-index="${product.id}">-</h5>
                     </div>
                 </div>
             </div>
@@ -57,8 +56,10 @@ const attachEventListeners = () => {
 
     increaseQtyBtn.forEach(increaseButton => {
         increaseButton.addEventListener('click', (e) => {
-            const productIndex = products.findIndex(prod => prod.id - 1 == e.currentTarget.dataset.index);
+            const productIndex = products.findIndex(prod => prod.id == e.currentTarget.dataset.index);
+            console.log(productIndex);
             products[productIndex].qty += 1;
+            
             window.localStorage.setItem('cart-products', JSON.stringify(products));
             listCartProducts();
         });
@@ -66,7 +67,9 @@ const attachEventListeners = () => {
 
     decreaseQtyBtn.forEach(decreaseButton => {
         decreaseButton.addEventListener('click', (e) => {
-            const productIndex = products.findIndex(prod => prod.id - 1 == e.currentTarget.dataset.index);
+            const productIndex = products.findIndex(prod => prod.id == e.currentTarget.dataset.index);
+            console.log(productIndex);
+            
             if (products[productIndex].qty > 1) {
                 products[productIndex].qty -= 1;
             }
@@ -80,3 +83,9 @@ const attachEventListeners = () => {
 listCartProducts();
 
 
+logout.addEventListener('click',() => {
+    localStorage.removeItem('userAuthentication');
+    localStorage.removeItem('cart-products');
+    window.location.href = 'index.html';
+    localStorage.setItem('authenticated', 'false');
+})

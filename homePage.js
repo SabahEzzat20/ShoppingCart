@@ -168,6 +168,7 @@ if (localStorage.getItem('authenticated') === 'false') {
 }
 logout.addEventListener('click',() => {
     localStorage.removeItem('userAuthentication');
+    localStorage.removeItem('cart-products');
     window.location.href = 'index.html';
     localStorage.setItem('authenticated', 'false');
 })
