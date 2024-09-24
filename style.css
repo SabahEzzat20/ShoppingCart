@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(to left bottom, #1b3367, #385288, #5473ab, #7196ce, #90bbf2);
+    /* background-color: rgb(32, 139, 73); */
 }
 #login-alert{
     display: none;
@@ -13,7 +13,9 @@
 .navbar-brand i{
     color: rgb(80, 163, 80);
 }
-
+.login-btn{
+    width: 100%;
+}
 .product{
     display: flex;
     align-items: start;
